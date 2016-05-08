@@ -18,6 +18,9 @@ class Car:
     def inspect(self):
         "Elixir.IO"::inspect(self.name)
         "Elixir.IO"::inspect(self.speed)
+
+# car = new Car()
+# car.inspect()
 ```
 
 ### Module definition
