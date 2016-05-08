@@ -19,6 +19,7 @@ class Car:
         "Elixir.IO"::inspect(self.name)
         "Elixir.IO"::inspect(self.speed)
 
+# # usage:
 # car = new Car()
 # car.inspect()
 ```
@@ -114,6 +115,7 @@ class SampleList:
     def reduce(self, acc, func):
         lists::foldl(func, acc, self.items)
 
+# # usage:
 # sample_list = new SampleList([1, 2, 3])
 # sample_list.select(lambda item: item > 1)
 #            .map(lambda item: item * 2}
