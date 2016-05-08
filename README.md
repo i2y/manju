@@ -21,7 +21,7 @@ class Car:
 ```
 
 ### Module definition
-Enumerable.u
+Enumerable.mj
 ```python
 def select(self, func):
     _select = lambda item, acc:
@@ -100,7 +100,7 @@ def each(self, func):
 ```
 
 ### Mixing in Modules
-SampleList.u
+SampleList.mj
 ```python
 class SampleList:
     include Enumerable
@@ -122,6 +122,10 @@ class SampleList:
 [1, 2, 3] |> lists::append([4, 5, 6])
           |> lists::append([7, 8, 9])
 # => [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+[1, 2, 3] |>> lists::append([4, 5, 6])
+          |>> lists::append([7, 8, 9])
+# => [7, 8, 9, 4, 5, 6, 1, 2, 3]
 ```
 
 ### Other supported features
