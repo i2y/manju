@@ -1,0 +1,9 @@
+/_build
+/deps
+/.idea
+erl_crash.dump
+*.ez
+*.beam
+*.erl
+*.lock
+manju

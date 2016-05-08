@@ -1,0 +1,23 @@
+include Enumerable
+
+def reduce(self, acc, func):
+    list = tuple_to_list(self)
+    lists::foldl(func, acc, list)
+
+def nth(self, n):
+    element(n, self)
+
+def set(self, n, item):
+    setelement(n, self, item)
+
+def size(self):
+    tuple_size(self)
+
+def append(self, item):
+    erlang::append_element(self, item) 
+
+def add(self, item):
+    erlang::append_element(self, item) 
+
+def to_list(self):
+    tuple_to_list(self)

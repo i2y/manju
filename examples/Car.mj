@@ -1,0 +1,13 @@
+class Car:
+    include parent, parent2
+
+    def __new__():
+        {:name : "aiueo",
+         :speed : 100}
+  
+    def test():
+        1000
+    
+    def inspect(self):
+        "Elixir.IO"::inspect(self.name)
+        "Elixir.IO"::inspect(self.speed)

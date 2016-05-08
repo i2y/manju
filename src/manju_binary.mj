@@ -1,0 +1,8 @@
+def size(self):
+    erlang::size(self)
+
+def iolist_size(self):
+    erlang::iolist_size(self)
+
+def to_list(self):
+    binary_to_list(self)

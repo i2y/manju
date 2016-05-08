@@ -1,0 +1,8 @@
+def display(self):
+    # aaa
+    io::format("~p", [self])
+    # fafaf
+
+def fafa(self):
+    "fafa"
+

@@ -1,0 +1,7 @@
+class Test:
+    def __new__(y):
+        {:x : 3, :y : y}
+
+    def test_new():
+        instance = new Test(10)
+        instance.display()

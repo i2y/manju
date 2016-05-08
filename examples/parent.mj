@@ -1,0 +1,2 @@
+def print35(self):
+    self.name

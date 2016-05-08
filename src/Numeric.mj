@@ -1,0 +1,17 @@
+def round_(self):
+    round(self)
+
+def truncate(self):
+    trunc(self)
+
+def to_int(self):
+    trunc(self)
+
+def to_i(self):
+    trunc(self)
+
+def zero?(self):
+    self == 0 or self == 0.0
+
+def nonzero?(self):
+    self != 0 and self != 0.0

@@ -1,0 +1,10 @@
+include Numeric
+
+def times(self, func):
+    if self == 0:
+      Nil
+    else if self == 1:
+      func.()
+    else:
+      func.()
+      times(self - 1, func)

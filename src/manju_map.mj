@@ -1,0 +1,43 @@
+include Enumerable
+
+def reduce(self, acc, func):
+    lists::foldl(func, acc, maps::values(self))
+
+def is_key?(self, key):
+    maps::is_key(key, self)
+
+def keys(self):
+    maps::keys(self)
+
+def values(self):
+    maps::values(self)
+
+def merge(self, other):
+    maps::marge(self, other)
+
+def put(self, key, value):
+    maps::put(key, value, self)
+
+def remove(self, key):
+    maps::remove(key, self)
+
+def size(self):
+    maps::size(self)
+
+def to_list(self):
+    maps::to_list(self)
+
+def update(self, key, value):
+    maps::update(key, value, self)
+
+def with(self, keys):
+    maps::with(keys, self)
+
+def without(self, keys):
+    maps::without(keys, self)
+
+def get(self, key):
+    maps::get(key, self)
+    
+def get(self, key, default):
+    maps::get(key, self, default)

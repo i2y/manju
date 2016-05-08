@@ -1,0 +1,55 @@
+include Enumerable
+
+def reduce(self, acc, func):
+    lists::foldl(func, acc, self)
+
+def index_of(self, item):
+    index_of(item, self, 1)
+
+def index_of(_, [], _):
+    False
+
+def index_of(item, [item|_], index):
+    index
+
+def index_of(item, [_|tl], index):
+    index_of(item, tl, index + 1)
+
+def add(self, item):
+    self ++ [item]
+
+def append(self, item):
+    self ++ [item]
+
+def conj(self, item):
+    [item|self]
+
+def add_all(self, lis):
+    self ++ lis
+
+def extend(self, lis):
+    self ++ lis
+
+def to_tuple(self):
+    list_to_tuple(self)
+
+def to_binary(self):
+    list_to_binary(self)
+
+def drop_last(self):
+    lists::droplast(self)
+
+def drop_while(self, func):
+    lists::dropwhile(func, self)
+
+def last(self):
+    lists::last(self)
+
+def member?(self, elem):
+    lists::member(elem, self)
+
+def nth(self, n):
+    lists::nth(n, self)
+
+def nth_tail(self, n):
+    lists::nthtail(n, self)
