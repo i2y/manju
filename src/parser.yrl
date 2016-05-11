@@ -485,8 +485,6 @@ record_field -> name equals binop_expr : [record_field, '$1', '$3'].
 
 record_field_index -> percent name dot name : [record_field_index, '$2', '$4'].
 
-%ref_attr_expr -> at name : [ref_attr, '$2'].
-
 receive_expr -> receive_keyword block_opener case_clauses block_closer
               : ['$1', '$3'].
 receive_expr -> receive_keyword block_opener case_clauses block_closer after_keyword int block_opener body block_closer

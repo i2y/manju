@@ -60,8 +60,9 @@ defmodule Compiler do
 
   def to_erl_syntax_list([manju_syntax | manju_syntax_list], func_map, acc) do
     case manju_syntax do
-      # [:func|_] -> to_erl_syntax_list(manju_syntax_list, put_func(manju_syntax, func_map))
-      [:func|_] -> to_erl_syntax_list(manju_syntax_list, put_func(manju_syntax, func_map), acc)
+      [:func|_] -> to_erl_syntax_list(manju_syntax_list,
+                                      put_func(manju_syntax, func_map),
+                                      acc)
       [:patterns|_] ->
         put_patterns(manju_syntax)
         to_erl_syntax_list(manju_syntax_list, func_map, acc)

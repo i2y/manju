@@ -42,8 +42,9 @@ defmodule Parser do
         [token|rest] = tokens
         cond do
           newline?(token) ->
-            {_, _, token_chars} = token
-            {indent_tokens, new_indents_stack} = _generate_indents(count_spaces(token_chars), indents_stack, [])
+            #{_, _, token_chars} = token
+            #{indent_tokens, new_indents_stack} = _generate_indents(count_spaces(token_chars), indents_stack, [])
+            {indent_tokens, new_indents_stack} = _generate_indents(token, indents_stack, [])
             # IO.inspect new_indents_stack
             # IO.inspect indent_tokens
             generate_indents(rest, indent_tokens ++ acc, new_indents_stack)
@@ -53,10 +54,13 @@ defmodule Parser do
     end
   end
 
-  defp _generate_indents(counts, indents_stack, acc) do
+  defp _generate_indents(token, indents_stack, acc) do
+    # IO.inspect token
+    {_, _, token_chars} = token
+    counts = count_spaces(token_chars)
     case indents_stack do
       [] ->
-        {[{:newline, 0, ''}|acc], indents_stack}
+        {[{:newline, 0, :newline}|acc], indents_stack}
         #{acc, indents_stack}
       _ ->
         [indent|rest] = indents_stack
@@ -67,16 +71,16 @@ defmodule Parser do
               [{:dedent, _, _}|_] ->
                 {acc, indents_stack}
               _ ->
-                {[{:newline, 0, ''}|acc], indents_stack}
+                {[{:newline, 0, :newline}|acc], indents_stack}
             end
           counts > indent ->
-            {[{:indent, 0, []}|acc], [counts|indents_stack]}
+            {[{:indent, 0, :indent}|acc], [counts|indents_stack]}
           true ->
             [_|new_indents_stack] = indents_stack
-            _generate_indents(counts,
+            #_generate_indents(counts,
+            _generate_indents(token,
                               new_indents_stack,
-                              [{:dedent, 0, ''}
-                               |acc])
+                              [{:dedent, 0, :dedent}|acc])
         end
     end
   end
