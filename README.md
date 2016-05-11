@@ -15,6 +15,7 @@ class Car:
          :speed : 100}
     
     def inspect(self):
+        # self is immutable
         "Elixir.IO"::inspect(self.name)
         "Elixir.IO"::inspect(self.speed)
 
@@ -150,7 +151,7 @@ $ mix archive.install
 ```
 
 ## Usage
-mix.exs file example 
+mix.exs file example:
 ```elixir
 defmodule MyApp.Mixfile do
   use Mix.Project
