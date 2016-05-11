@@ -1,6 +1,5 @@
 # Manju
-
-Manju is a simple OOP, dynamically typed, functional language that runs on the [Erlang](http://www.erlang.org) virtual machine (BEAM).
+Manju is a simple object oriented, dynamically typed, functional language that runs on the [Erlang](http://www.erlang.org) virtual machine (BEAM).
 Manju's syntax is [Python](https://www.python.org)-like syntax.
 Manju also got an influence from [Ruby](https://www.ruby-lang.org) and [Mochi](https://github.com/i2y/mochi).
 
@@ -143,22 +142,25 @@ class SampleList:
 - Macro definition
 
 ## Installation
-TODO
+```sh
+$ git clone https://github.com/i2y/manju.git
+$ cd manju
+$ mix archive.build
+$ mix archive.install
+```
 
 ## Usage
-Mixfile example 
+mix.exs file example 
 ```elixir
-defmodule Manju.Mixfile do
+defmodule MyApp.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :manju,
-     version: "0.0.1",
-     elixir: "~> 1.1",
-     compilers: [:manju] ++ Mix.compilers,
-     escript: [main_module: Manju],
-     docs: [readme: true, main: "README.md"]]
+    [app: :my_app,
+     version: "1.0.0",
+     compilers: [:manju|Mix.compilers],
+     deps: [{:manju, git: "https://github.com/i2y/manju.git"}]
   end
 end
 ```
-".mj" files in source directory(src) is automatically compiled by mix command.
+".mj" files in source directory(src) is automatically compiled by Mix command.
