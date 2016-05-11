@@ -140,7 +140,7 @@ class SampleList:
 
 ### Not supported features
 - Class inheritance
-- Macro definition
+- Lisp-like Macro definition
 
 ## Installation
 ```sh
