@@ -110,7 +110,7 @@ class SampleList:
     include Enumerable
   
     def __new__(items):
-        {items: items}
+        {:items : items}
     
     def reduce(self, acc, func):
         lists::foldl(func, acc, self.items)
