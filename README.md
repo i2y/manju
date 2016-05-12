@@ -160,7 +160,7 @@ defmodule MyApp.Mixfile do
     [app: :my_app,
      version: "1.0.0",
      compilers: [:manju|Mix.compilers],
-     deps: [{:manju, git: "https://github.com/i2y/manju.git"}]
+     deps: [{:manju, git: "https://github.com/i2y/manju.git"}]]
   end
 end
 ```
