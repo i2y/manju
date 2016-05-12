@@ -11,8 +11,8 @@ Car.mj
 ```python
 class Car:
     def __new__():
-        {:name : "foo",
-         :speed : 100}
+        {'name': "foo",
+         'speed': 100}
     
     def inspect(self):
         # self is immutable
@@ -76,7 +76,7 @@ def min(self, func):
             case 1:
                 item
     
-    self.reduce(:infinity, _min)
+    self.reduce('infinity', _min)
 
 def min(self):
     _min = lambda item, acc:
@@ -110,7 +110,7 @@ class SampleList:
     include Enumerable
   
     def __new__(items):
-        {:items : items}
+        {'items': items}
     
     def reduce(self, acc, func):
         lists::foldl(func, acc, self.items)
