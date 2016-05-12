@@ -15,7 +15,7 @@ class Car:
          'speed': 100}
     
     def inspect(self):
-        # self is immutable
+        # self's state is immutable.
         "Elixir.IO"::inspect(self.name)
         "Elixir.IO"::inspect(self.speed)
 
