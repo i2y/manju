@@ -2,8 +2,8 @@ class Car:
     include parent, parent2
 
     def __new__():
-        {:name : "aiueo",
-         :speed : 100}
+        {'name': "aiueo",
+         'speed': 100}
   
     def test():
         1000

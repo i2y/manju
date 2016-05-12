@@ -2,7 +2,7 @@ Definitions.
 
 INT = [0-9]+
 INT_WITH_BASE = [0-9]+\$[0-9a-zA-Z]+
-ATOM = :[_a-zA-Z$][-_a-zA-Z0-9]*
+ATOM = '[_a-zA-Z$][-_a-zA-Z0-9]*'
 WHITESPACE = [\s\t]|#[^\n]*
 NEWLINE = ([\n\r][\s\t]*)+
 
@@ -204,8 +204,8 @@ Rules.
 
 Erlang code.
 
-to_atom([$:|Chars]) ->
-    list_to_atom(Chars).
+to_atom([$'|Chars]) ->
+    list_to_atom(lists:reverse(tl(lists:reverse(Chars)))).
 
 to_integer(Chars) ->
     SharpPos = string:chr(Chars, $$) - 1,

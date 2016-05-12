@@ -1,31 +1,31 @@
 def call_method(obj, method_name, args) if is_list(obj):
-    call_target_method(:uiro_list, obj, method_name, args)
+    call_target_method('manju_list', obj, method_name, args)
 
 def call_method(obj, method_name, args) if is_integer(obj):
-    call_target_method(:uiro_integer, obj, method_name, args)
+    call_target_method('manju_integer', obj, method_name, args)
 
 def call_method(obj, method_name, args) if is_float(obj):
-    call_target_method(:uiro_float, obj, method_name, args)
+    call_target_method('manju_float', obj, method_name, args)
 
 def call_method(obj, method_name, args) if is_tuple(obj):
-    call_target_method(:uiro_tuple, obj, method_name, args)
+    call_target_method('manju_tuple', obj, method_name, args)
 
 def call_method(obj, method_name, args) if is_binary(obj):
-    call_target_method(:uiro_binary, obj, method_name, args)
+    call_target_method('manju_binary', obj, method_name, args)
 
-def call_method({:__class__ : module_name, :__state__ : state}, method_name, args):
-    obj = {:__class__ : module_name, :__state__ : state}
-    exports = apply(module_name, :module_info, [:exports])
+def call_method({'__class__': module_name, '__state__': state}, method_name, args):
+    obj = {'__class__': module_name, '__state__': state}
+    exports = apply(module_name, 'module_info', ['exports'])
     if lists::keyfind(method_name, 1, exports):
         apply(module_name, method_name, [obj|args])
     else:
       call_parent_method(module_name, obj, method_name, args)
 
 def call_method(obj, method_name, args) if is_map(obj):
-    call_target_method(:uiro_map, obj, method_name, args)
+    call_target_method('manju_map', obj, method_name, args)
 
 def call_target_method(module_name, obj, method_name, args):
-    exports = apply(module_name, :module_info, [:exports])
+    exports = apply(module_name, 'module_info', ['exports'])
     if lists::keyfind(method_name, 1, exports):
         apply(module_name, method_name, [obj|args])
     else:
@@ -38,17 +38,17 @@ def list_modules_([], acc):
     acc
 
 def list_modules(module_name):
-    attributes = apply(module_name, :module_info, [:attributes])
-    match lists::keyfind(:include, 1, attributes):
-        case :false:
+    attributes = apply(module_name, 'module_info', ['attributes'])
+    match lists::keyfind('include', 1, attributes):
+        case 'false':
             []
-        case (:include, :false):
+        case ('include', 'false'):
             []
-        case (:include, include_mods):
+        case ('include', include_mods):
             list_modules_(include_mods, [])
 
 def call_parent_method(module_name, obj, method_name, args):
-    include_mods = list_modules(module_name) ++ [:Kernel]
+    include_mods = list_modules(module_name) ++ ['Kernel']
     # "Elixir.IO"::inspect(include_mods)
     if include_mods:
         target_mod = find_mod((method_name, length(args) + 1), include_mods)
@@ -60,7 +60,7 @@ def find_mod(method, []):
     index_of(method, [])
 
 def find_mod(method, [mod|tl]):
-    exports = apply(mod, :module_info, [:exports])
+    exports = apply(mod, 'module_info', ['exports'])
     if index_of(method, exports):
         mod
     else:
@@ -79,5 +79,5 @@ def index_of(item, [_|tl], index):
     index_of(item, tl, index + 1)
 
 def new_object(module_name, args):
-    {:__class__ : module_name,
-     :__state__ : apply(module_name, :__new__, args)}
+    {'__class__': module_name,
+     '__state__': apply(module_name, '__new__', args)}

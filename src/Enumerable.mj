@@ -47,7 +47,7 @@ def min(self, func):
             case 1:
                 item
     
-    self.reduce(:infinity, _min)
+    self.reduce('infinity', _min)
 
 def min(self):
     _min = lambda item, acc:
@@ -56,7 +56,7 @@ def min(self):
         else:
             item
     
-    self.reduce(:infinity, _min)
+    self.reduce('infinity', _min)
 
 def unique(self):
     _unique = lambda item, acc:
