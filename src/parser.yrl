@@ -280,11 +280,11 @@ method_stmt -> def_keyword name args guards block_opener body block_closer
 method_stmt -> at name newlines def_keyword name args block_opener body block_closer
                : [decorated_func, [attr, '$2', [to_atom_token('$5')]], [func, '$5', '$6', '$8']].
 method_stmt -> at name args newlines def_keyword name args block_opener body block_closer
-               : [decorated_func, [attr, '$2', [to_atom_token('$6')|'$3']], [func, '$6', '$7', '$9']].
+               : [decorated_func, [attr, '$2', '$3' ++ [to_atom_token('$6')]], [func, '$6', '$7', '$9']].
 method_stmt -> at name newlines def_keyword name args guards block_opener body block_closer
                : [decorated_func, [attr, '$2', [to_atom_token('$5')]], [func, '$5', '$6', '$7', '$9']].
 method_stmt -> at name args newlines def_keyword name args guards block_opener body block_closer
-               : [decorated_func, [attr, '$2', [to_atom_token('$6')]], [func, '$6', '$7', '$8', '$10']].
+               : [decorated_func, [attr, '$2', '$3' ++ [to_atom_token('$6')]], [func, '$6', '$7', '$8', '$10']].
 
 args -> paren_opener args_pattern paren_closer : '$2'.
 args -> paren_opener paren_closer : [].
