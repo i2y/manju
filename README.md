@@ -14,14 +14,15 @@ class Car:
         {'name': "foo",
          'speed': 100}
     
-    def inspect(self):
-        # self's state is immutable.
-        "Elixir.IO"::inspect(self.name)
-        "Elixir.IO"::inspect(self.speed)
+    def format(self):
+        # self's state is immutable and private.
+        # self's state can be referred by "self.attr_name" form.
+        self.name.display()
+        self.speed.display()
 
 # # usage:
 # car = new Car()
-# car.inspect()
+# car.format()
 ```
 
 ### Module definition
@@ -30,77 +31,18 @@ Enumerable.mj
 def select(self, func):
     _select = lambda item, acc:
         if func.(item):
-            acc ++ [item]
+            acc.append(item)
         else:
             acc
 
     self.reduce([], _select)
 
-def filter(self, func):
-    _filter = lambda item, acc:
-        if func.(item):
-            acc ++ [item]
-        else:
-            acc
-    
-    self.reduce([], _filter)
-
-def reject(self, func):
-    _reject = lambda item, acc:
-        if func.(item):
-            acc
-        else:
-            acc ++ [item]
-    
-    self.reduce([], _reject)
 
 def map(self, func):
     _map = lambda item, acc:
-        acc ++ [func.(item)]
+        acc.append(func.(item))
     
     self.reduce([], _map)
-
-def collect(self, func):
-    _collect = lambda item, acc:
-        acc ++ [func.(item)]
-
-    self.reduce([], _collect)
-
-def min(self, func):
-    _min = lambda item, acc:
-        match func.(acc, item):
-            case -1:
-                0
-            case 0:
-                0
-            case 1:
-                item
-    
-    self.reduce('infinity', _min)
-
-def min(self):
-    _min = lambda item, acc:
-        if acc <= item:
-            acc
-        else:
-            item
-    
-    self.reduce(:infinity, _min)
-
-def unique(self):
-    _unique = lambda item, acc:
-        if acc.index_of(item):
-            acc
-        else:
-            acc ++ [item]
-    
-    self.reduce([], _unique)
-
-def each(self, func):
-    _each = lambda item, acc:
-        func.(item)
-    
-    self.reduce([], _each)
 ```
 
 ### Mixing in Modules
@@ -108,7 +50,7 @@ SampleList.mj
 ```python
 class SampleList:
     include Enumerable
-  
+
     def __new__(items):
         {'items': items}
     
