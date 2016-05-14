@@ -170,6 +170,7 @@ $ git clone https://github.com/i2y/manju.git
 $ cd manju
 $ mix archive.build
 $ mix archive.install
+$ mix escript.build
 $ cp manju <any path>
 ```
 
