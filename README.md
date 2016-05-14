@@ -176,12 +176,22 @@ $ cp manju <any path>
 
 ## Usage
 ### Command
+Compiling:
 ```sh
 $ ls
 foo.mj
 $ manju foo.mj
 $ ls
 foo.beam foo.mj
+```
+
+Compiling and Executing:
+```sh
+$ cat foo.mj
+def bar():
+    123.display()
+$ manju -r foo::bar foo.mj
+123
 ```
 
 ### Mix
