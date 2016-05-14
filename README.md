@@ -33,9 +33,9 @@ list.append(5) # => [2, 3, 4, 5]
 list # => [2, 3, 4]
 
 
-list.select(lambda item: item > 1)
-    .map(lambda item: item * 2) # => [4, 6]
-list # => [2, 4, 5]
+list.select(lambda item: item > 2)
+    .map(lambda item: item * 2) # => [6, 8]
+list # => [2, 3, 4]
 
 # list comprehensions
 [n * 2 for n in list] # => [4, 6, 8]
