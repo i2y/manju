@@ -5,9 +5,81 @@ Manju also got an influence from [Ruby](https://www.ruby-lang.org) and [Mochi](h
 
 Its interpreter is written in [Elixir](http://elixir-lang.org). The interpreter translates a program written in Manju to Erlang's AST / bytecode.
 
-## Language features
+## Language Features
+### Builtin Types
+```python
+### Numbers
+
+49  # integer
+4.9 # float
+
+### Booleans
+
+True
+False
+
+### Atoms
+
+'foo'
+
+### Lists
+
+list = [2, 3, 4]
+list2 = [1|list] # => [1, 2, 3, 4]
+[1, 2, 3|rest] = list2
+rest # => [4]
+
+list.append(5) # => [2, 3, 4, 5]
+list # => [2, 3, 4]
+
+
+list.select(lambda item: item > 1)
+    .map(lambda item: item * 2) # => [4, 6]
+list # => [2, 4, 5]
+
+# list comprehensions
+[n * 2 for n in list] # => [4, 6, 8]
+
+### Tuples
+
+tuple = (1, 2, 3)
+tuple.select(lambda item: item > 1)
+     .map(lambda item: item * 2) # => [4, 6]
+
+tuple.to_list() # => [1, 2, 3]
+
+
+### Dicts (Maps)
+
+dict = {'foo': 1, 'bar': 2}
+dict2 = dict.put('baz', 3) # => {'foo': 1, 'bar': 2, 'baz': 3}
+dict # => {'foo': 1, 'bar': 2}
+dict.get('baz', 100) # => 100
+
+### Strings
+
+"Abc"
+
+### Binaries
+
+<<1, 2, 3>>
+<<"abc">>
+<<1 , 2, x>> = <<1, 2, 3>>
+x # => 3
+
+### Anonymous functions
+
+add = lambda x, y: x + y
+add(40, 9) # => 49
+
+multiply = lambda x, y:
+  x * y
+
+multiply(7, 7) # => 49
+```
+
 ### Class definition
-Car.mj
+Car.mj:
 ```python
 class Car:
     def __new__():
@@ -26,7 +98,7 @@ class Car:
 ```
 
 ### Module definition
-Enumerable.mj
+Enumerable.mj:
 ```python
 def select(self, func):
     _select = lambda item, acc:
@@ -46,7 +118,7 @@ def map(self, func):
 ```
 
 ### Mixing in Modules
-SampleList.mj
+SampleList.mj:
 ```python
 class SampleList:
     include Enumerable
@@ -75,14 +147,22 @@ class SampleList:
 # => [7, 8, 9, 4, 5, 6, 1, 2, 3]
 ```
 
-### Other supported features
-- Tail recursion optimization
-- Pattern matching
-- List comprehension
+### Other assorted features
+```ruby
+### Ranges
+1..10 # => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# WIP
+```
+
 
 ### Not supported features
 - Class inheritance
 - Lisp-like Macro definition
+
+## Requirements
+- Erlang/OTP >= 18.0
+- Elixir >= 1.1
 
 ## Installation
 ```sh
@@ -90,9 +170,20 @@ $ git clone https://github.com/i2y/manju.git
 $ cd manju
 $ mix archive.build
 $ mix archive.install
+$ cp manju <any path>
 ```
 
 ## Usage
+### Command
+```sh
+$ ls
+foo.mj
+$ manju foo.mj
+$ ls
+foo.beam foo.mj
+```
+
+### Mix
 mix.exs file example:
 ```elixir
 defmodule MyApp.Mixfile do
