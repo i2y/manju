@@ -152,9 +152,9 @@ class SampleList:
 
 # # usage:
 # proplists::get_all_values('author', SampleList::module_info('attributes'))
-# # => [['author', "i2y"]]
+# # => [["i2y"]]
 # proplists::get_all_values('obsolete', SampleList::module_info('attributes'))
-# # => [['', "i2y"]]
+# # => [['reduce']]
 ```
 
 ### Pipe operator
