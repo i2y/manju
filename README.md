@@ -136,6 +136,27 @@ class SampleList:
 #            # => [4, 6]
 ```
 
+### Module attributes
+SampleList.mj:
+```python
+class SampleList:
+    include Enumerable
+    @author("i2y")
+
+    def __new__(items):
+        {'items': items}
+    
+    @obsolete
+    def reduce(self, acc, func):
+        lists::foldl(func, acc, self.items)
+
+# # usage:
+# proplists::get_all_values('author', SampleList::module_info('attributes'))
+# # => [['author', "i2y"]]
+# proplists::get_all_values('obsolete', SampleList::module_info('attributes'))
+# # => [['', "i2y"]]
+```
+
 ### Pipe operator
 ```python
 [1, 2, 3] |> lists::append([4, 5, 6])

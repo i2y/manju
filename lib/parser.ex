@@ -60,7 +60,7 @@ defmodule Parser do
     counts = count_spaces(token_chars)
     case indents_stack do
       [] ->
-        {[{:newline, 0, :newline}|acc], indents_stack}
+        {[{:newline, 0, token_chars}|acc], indents_stack}
         #{acc, indents_stack}
       _ ->
         [indent|rest] = indents_stack
@@ -71,7 +71,7 @@ defmodule Parser do
               [{:dedent, _, _}|_] ->
                 {acc, indents_stack}
               _ ->
-                {[{:newline, 0, :newline}|acc], indents_stack}
+                {[{:newline, 0, token_chars}|acc], indents_stack}
             end
           counts > indent ->
             {[{:indent, 0, :indent}|acc], [counts|indents_stack]}

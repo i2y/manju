@@ -277,14 +277,18 @@ method_stmt -> def_keyword name args block_opener body block_closer
                : [func, '$2', '$3', '$5'].
 method_stmt -> def_keyword name args guards block_opener body block_closer
                : [func, '$2', '$3', '$4','$6'].
-method_stmt -> at name newlines def_keyword name args block_opener body block_closer
-               : [decorated_func, [attr, '$2', [to_atom_token('$5')]], [func, '$5', '$6', '$8']].
-method_stmt -> at name args newlines def_keyword name args block_opener body block_closer
-               : [decorated_func, [attr, '$2', '$3' ++ [to_atom_token('$6')]], [func, '$6', '$7', '$9']].
-method_stmt -> at name newlines def_keyword name args guards block_opener body block_closer
-               : [decorated_func, [attr, '$2', [to_atom_token('$5')]], [func, '$5', '$6', '$7', '$9']].
-method_stmt -> at name args newlines def_keyword name args guards block_opener body block_closer
-               : [decorated_func, [attr, '$2', '$3' ++ [to_atom_token('$6')]], [func, '$6', '$7', '$8', '$10']].
+method_stmt -> at name newline def_keyword name args block_opener body block_closer
+               : [decorated_func, [attr, '$2', add_func_name([], '$3', '$5')],
+                                  [func, '$5', '$6', '$8']].
+method_stmt -> at name args newline def_keyword name args block_opener body block_closer
+               : [decorated_func, [attr, '$2', add_func_name('$3', '$4', '$6')],
+                                  [func, '$6', '$7', '$9']].
+method_stmt -> at name newline def_keyword name args guards block_opener body block_closer
+               : [decorated_func, [attr, '$2', add_func_name([], '$3', '$5')],
+                                  [func, '$5', '$6', '$7', '$9']].
+method_stmt -> at name args newline def_keyword name args guards block_opener body block_closer
+               : [decorated_func, [attr, '$2', add_func_name('$3', '$4', '$6')],
+                                  [func, '$6', '$7', '$8', '$10']].
 
 args -> paren_opener args_pattern paren_closer : '$2'.
 args -> paren_opener paren_closer : [].
@@ -567,6 +571,18 @@ get_func_expr -> amp name op_div int : [get_func, '$2', '$4'].
 
 
 Erlang code.
+
+count_char(String, Char) ->
+    F = fun(X, N) when X =:= Char -> N + 1;
+           (_, N)                 -> N
+        end,
+    lists:foldl(F, 0, String).
+
+add_func_name(Attr_values, Newline_token, Func_name) ->
+    case count_char(value(Newline_token), $\n) < 2 of
+        true -> Attr_values ++ [to_atom_token(Func_name)];
+        _    -> Attr_values
+    end.
 
 line_of(Token) ->
     element(2, Token).
