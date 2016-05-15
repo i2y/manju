@@ -150,11 +150,14 @@ class SampleList:
     def reduce(self, acc, func):
         lists::foldl(func, acc, self.items)
 
+    @obsolete("since version 12")
+    def append(self, item):
+        self ++ [item]
+
 # # usage:
-# proplists::get_all_values('author', SampleList::module_info('attributes'))
-# # => [["i2y"]]
-# proplists::get_all_values('obsolete', SampleList::module_info('attributes'))
-# # => [['reduce']]
+# list = new SampleList([1, 2, 3])
+# list.get_class_attr_values('obsolete') 
+# # => [['reduce'], ["since version 12", 'append']]
 ```
 
 ### Pipe operator
