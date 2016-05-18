@@ -152,7 +152,7 @@ class SampleList:
 
     @obsolete("since version 12")
     def append(self, item):
-        self ++ [item]
+        self.items.append(item)
 
 # # usage:
 # list = new SampleList([1, 2, 3])
