@@ -1,17 +1,17 @@
 def display(self):
     io::format("~p", [self])
 
-def class_info(self, info_type):
+def get_class_info(self, info_type):
     {'__class__': module_name} = self
     apply(module_name, 'module_info', [info_type])
 
-def class_info(self):
+def get_class_info(self):
     {'__class__': module_name} = self
     apply(module_name, 'module_info', [])
 
-def class_attributes(self):
+def get_class_attrs(self):
     {'__class__': module_name} = self
     apply(module_name, 'module_info', ['attributes'])
 
-def class_attribute_values(self, attribute_name):
-    proplists::get_all_values(attribute_name, self.class_attributes())
+def get_class_attr_values(self, attribute_name):
+    proplists::get_all_values(attribute_name, self.get_class_attrs())
