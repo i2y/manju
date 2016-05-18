@@ -9,10 +9,11 @@ defmodule Manju.Mixfile do
      escript: [main_module: Manju],
      docs: [readme: true, main: "README.md"],
      description: """
-     Manju is a simple OOP, dynamically typed, functional language that runs on the Erlang virtual machine (BEAM).
+     Manju is a simple object oriented, dynamically typed, functional language that runs on the Erlang virtual machine (BEAM).
      Manju's sytnax is Python-like syntax.
      """,
-     deps: deps]
+     deps: deps,
+     package: package]
   end
 
   defp deps do
