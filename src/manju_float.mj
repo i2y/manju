@@ -1,2 +1,4 @@
 include Numeric
 
+def to_list(self):
+    float_to_list(self)

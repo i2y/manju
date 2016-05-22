@@ -8,3 +8,6 @@ def times(self, func):
     else:
       func.()
       times(self - 1, func)
+
+def to_list(self):
+    integer_to_list(self)
