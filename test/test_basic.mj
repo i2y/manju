@@ -1,0 +1,21 @@
+@test
+def if_stmt():
+    value = if True:
+        100
+    else:
+        200
+    test::assert_eq(value, 100)
+
+@test
+def if_stmt_else():
+    value = if False:
+        100
+    else:
+        200
+    test::assert_eq(value, 200)
+
+@test
+def if_stmt_single():
+    value = if True:
+      200
+    test::assert_eq(value, 200)
