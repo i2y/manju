@@ -17,5 +17,5 @@ def if_stmt_else():
 @test
 def if_stmt_single():
     value = if True:
-      200
+        200
     test::assert_eq(value, 200)

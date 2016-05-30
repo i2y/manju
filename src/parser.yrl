@@ -278,16 +278,16 @@ method_stmt -> def_keyword name args block_opener body block_closer
 method_stmt -> def_keyword name args guards block_opener body block_closer
                : [func, '$2', '$3', '$4','$6'].
 method_stmt -> at name newline def_keyword name args block_opener body block_closer
-               : [decorated_func, [attr, '$2', add_func_name([], '$3', '$5')],
+               : [decorated_func, [attr, '$2', add_func_name_and_arity([], '$3', '$5', {int, 0, length('$6')})],
                                   [func, '$5', '$6', '$8']].
 method_stmt -> at name args newline def_keyword name args block_opener body block_closer
-               : [decorated_func, [attr, '$2', add_func_name('$3', '$4', '$6')],
+               : [decorated_func, [attr, '$2', add_func_name_and_arity('$3', '$4', '$6', {int, 0, length('$7')})],
                                   [func, '$6', '$7', '$9']].
 method_stmt -> at name newline def_keyword name args guards block_opener body block_closer
-               : [decorated_func, [attr, '$2', add_func_name([], '$3', '$5')],
+               : [decorated_func, [attr, '$2', add_func_name_and_arity([], '$3', '$5', {int, 0, length('$6')})],
                                   [func, '$5', '$6', '$7', '$9']].
 method_stmt -> at name args newline def_keyword name args guards block_opener body block_closer
-               : [decorated_func, [attr, '$2', add_func_name('$3', '$4', '$6')],
+               : [decorated_func, [attr, '$2', add_func_name_and_arity('$3', '$4', '$6', {int, 0, length('$7')})],
                                   [func, '$6', '$7', '$8', '$10']].
 
 args -> paren_opener args_pattern paren_closer : '$2'.
@@ -579,9 +579,9 @@ count_char(String, Char) ->
         end,
     lists:foldl(F, 0, String).
 
-add_func_name(Attr_values, Newline_token, Func_name) ->
+add_func_name_and_arity(Attr_values, Newline_token, Func_name, Arity) ->
     case count_char(value(Newline_token), $\n) < 2 of
-        true -> Attr_values ++ [to_atom_token(Func_name)];
+        true -> Attr_values ++ [[tuple, to_atom_token(Func_name), Arity]];
         _    -> Attr_values
     end.
 

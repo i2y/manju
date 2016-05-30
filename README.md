@@ -141,7 +141,7 @@ SampleList.mj:
 ```python
 class SampleList:
     include Enumerable
-    @author("i2y")
+    @author("i2y", "others")
 
     def __new__(items):
         {'items': items}
@@ -156,8 +156,10 @@ class SampleList:
 
 # # usage:
 # list = new SampleList([1, 2, 3])
-# list.get_class_attr_values('obsolete') 
-# # => [['reduce'], ["since version 12", 'append']]
+# list.class_attr_values('author')
+# # => [["i2y", "others"]]
+# list.class_attr_values('obsolete') 
+# # => [[('reduce', 3)], ["since version 12", ('append', 2)]]
 ```
 
 ### Pipe operator

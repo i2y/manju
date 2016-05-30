@@ -23,7 +23,7 @@ defmodule Mix.Tasks.Test.Manju do
     module = String.to_atom(module_name)
     Enum.map(:proplists.get_all_values(:test, apply(module, :module_info, [:attributes])),
              fn test ->
-               test_func = List.last(test)
+               {test_func, arity} = List.last(test)
                {test_func, apply(module, test_func, [])}
              end)
   end
