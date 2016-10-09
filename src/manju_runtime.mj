@@ -1,3 +1,5 @@
+record object(__class__, __state__)
+
 def call_method(obj, method_name, args) if is_atom(obj):
     call_target_method('manju_atom', obj, method_name, args)
 
@@ -16,13 +18,14 @@ def call_method(obj, method_name, args) if is_tuple(obj):
 def call_method(obj, method_name, args) if is_binary(obj):
     call_target_method('manju_binary', obj, method_name, args)
 
-def call_method({'__class__': module_name, '__state__': state}, method_name, args):
-    obj = {'__class__': module_name, '__state__': state}
+def call_method(%object(__class__ = module_name, __state__ = state),
+                method_name, args):
+    obj = %object(__class__ = module_name, __state__ = state)
     exports = apply(module_name, 'module_info', ['exports'])
     if lists::keyfind(method_name, 1, exports):
         apply(module_name, method_name, [obj|args])
     else:
-      call_parent_method(module_name, obj, method_name, args)
+        call_parent_method(module_name, obj, method_name, args)
 
 def call_method(obj, method_name, args) if is_map(obj):
     call_target_method('manju_map', obj, method_name, args)
@@ -82,5 +85,5 @@ def index_of(item, [_|tl], index):
     index_of(item, tl, index + 1)
 
 def new_object(module_name, args):
-    {'__class__': module_name,
-     '__state__': apply(module_name, '__new__', args)}
+    %object(__class__ = module_name,
+            __state__ = apply(module_name, '__init__', args))

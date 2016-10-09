@@ -246,11 +246,7 @@ import_stmt -> from name import_keyword export_names
 
 behavior_stmt -> behavior name : ['$1', '$2'].
 
-record_def_stmt -> record_keyword name block_closer
-                 : [{record_def, line_of('$1')}, '$2', []].
-record_def_stmt -> record_keyword name record_fields block_closer
-                 : [{record_def, line_of('$1')}, '$2', '$3' ].
-record_def_stmt -> record_keyword name newlines record_fields block_closer
+record_def_stmt -> record_keyword name paren_opener record_fields paren_closer
                  : [{record_def, line_of('$1')}, '$2', '$4' ].
 
 patterns_stmt -> patterns name block_opener patterns_members block_closer
