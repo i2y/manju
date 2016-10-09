@@ -3,7 +3,7 @@ Manju is a simple object oriented, dynamically typed, functional language that r
 Manju's syntax is [Python](https://www.python.org)-like syntax.
 Manju also got an influence from [Ruby](https://www.ruby-lang.org) and [Mochi](https://github.com/i2y/mochi).
 
-Its interpreter is written in [Elixir](http://elixir-lang.org). The interpreter translates a program written in Manju to Erlang's AST / bytecode.
+Its compiler is written in [Elixir](http://elixir-lang.org). The compiler translates a program written in Manju to Erlang's AST / bytecode.
 
 ## Language Features
 ### Builtin Types
@@ -85,7 +85,7 @@ class Car:
     def __new__():
         {'name': "foo",
          'speed': 100}
-    
+
     def format(self):
         # self's state is immutable and private.
         # self's state can be referred by "self.attr_name" form.
@@ -113,7 +113,7 @@ def select(self, func):
 def map(self, func):
     _map = lambda item, acc:
         acc.append(func.(item))
-    
+
     self.reduce([], _map)
 ```
 
@@ -125,7 +125,7 @@ class SampleList:
 
     def __new__(items):
         {'items': items}
-    
+
     def reduce(self, acc, func):
         lists::foldl(func, acc, self.items)
 
@@ -145,7 +145,7 @@ class SampleList:
 
     def __new__(items):
         {'items': items}
-    
+
     @obsolete
     def reduce(self, acc, func):
         lists::foldl(func, acc, self.items)
@@ -158,7 +158,7 @@ class SampleList:
 # list = new SampleList([1, 2, 3])
 # list.class_attr_values('author')
 # # => [["i2y", "others"]]
-# list.class_attr_values('obsolete') 
+# list.class_attr_values('obsolete')
 # # => [[('reduce', 3)], ["since version 12", ('append', 2)]]
 ```
 
