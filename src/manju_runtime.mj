@@ -12,9 +12,6 @@ def call_method(obj, method_name, args) if is_integer(obj):
 def call_method(obj, method_name, args) if is_float(obj):
     call_target_method('manju_float', obj, method_name, args)
 
-def call_method(obj, method_name, args) if is_tuple(obj):
-    call_target_method('manju_tuple', obj, method_name, args)
-
 def call_method(obj, method_name, args) if is_binary(obj):
     call_target_method('manju_binary', obj, method_name, args)
 
@@ -29,6 +26,9 @@ def call_method(%object(__class__ = module_name, __state__ = state),
 
 def call_method(obj, method_name, args) if is_map(obj):
     call_target_method('manju_map', obj, method_name, args)
+
+def call_method(obj, method_name, args) if is_tuple(obj):
+    call_target_method('manju_tuple', obj, method_name, args)
 
 def call_target_method(module_name, obj, method_name, args):
     exports = apply(module_name, 'module_info', ['exports'])
@@ -55,12 +55,11 @@ def list_modules(module_name):
 
 def call_parent_method(module_name, obj, method_name, args):
     include_mods = list_modules(module_name) ++ ['Kernel']
-    # "Elixir.IO"::inspect(include_mods)
-    if include_mods:
-        target_mod = find_mod((method_name, length(args) + 1), include_mods)
-        apply(target_mod, method_name, [obj|args])
+    target_mod = find_mod((method_name, length(args) + 1), include_mods)
+    if target_mod == False:
+        apply(module_name, '__method_missing__', [obj, method_name, args])
     else:
-        "TODO exception"
+        apply(target_mod, method_name, [obj|args])
 
 def find_mod(method, []):
     index_of(method, [])
@@ -86,4 +85,4 @@ def index_of(item, [_|tl], index):
 
 def new_object(module_name, args):
     %object(__class__ = module_name,
-            __state__ = apply(module_name, '__init__', args))
+            __state__ = apply(module_name, '__new__', args))

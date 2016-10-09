@@ -659,11 +659,12 @@ defmodule Compiler do
   end
 
   def to_erl_syntax([:ref_attr, {:name, line, name}]) do
-    operator = module_qualifier(atom(:maps), atom(:get))
-    application(operator,
+    maps_get_operator = module_qualifier(atom(:maps), atom(:get))
+    tuple_elem_operator = module_qualifier(atom(:erlang), atom(:element))
+    application(maps_get_operator,
                 [atom(name),
-                 application(operator,
-                             [atom(:__state__),
+                 application(tuple_elem_operator,
+                             [integer(3),
                               variable(:self) |> set_pos(line)])
                  |> set_pos(line)])
     |> set_pos(line)

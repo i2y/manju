@@ -9,7 +9,8 @@ defmodule Manju do
                                     |> Compiler.to_erl_syntax_list(%{}, [])
                                     |> Compiler.to_erl_form_list(module_name)
     binary_to_path({module_name, binary}, Path.dirname(module_file_path))
-    validate_protocol(:erlang.list_to_atom(module_name))
+    # TODO
+    # validate_protocol(:erlang.list_to_atom(module_name))
     if options[:run] do
       [module_name, func_name] = String.split(options[:run], "::")
       apply(String.to_atom(module_name), String.to_atom(func_name), [])
